@@ -10,7 +10,6 @@ metadata.set("authorization", "Key 81fe6e0759124ad8b0fe947794ae4018");
 const handleApiCall = (req, res) => {
     stub.PostModelOutputs(
         {
-            // This is the model ID of a publicly available General model. You may use any other public or custom model ID.
             model_id: "a403429f2ddf4b49b307e318f00e528b",
             inputs: [{data: {image: {url: req.body.input}}}]
         },

@@ -2,7 +2,7 @@ const handleProfileGet = (req, res, db) => {
     const { id } = req.params;
     db.select('*').from('users').where({id})
     //on ES6, when an object has the same name of the property and the value,
-    //you don't need to white id: id
+    //you don't need to write id: id
     .then(user => {
         if (user.length) {
             res.json(user[0])
