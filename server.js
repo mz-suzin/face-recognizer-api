@@ -35,7 +35,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => { res.send(db.users) })
+// app.get('/', (req, res) => { res.send(db.users) })
+app.get('/', (req, res) => { res.send('it is working!') })
 app.post('/signin', signin.handleSignin(db, bcrypt))
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt)})
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)}) //the :id here means that anything that the get request finds in the position of the :id will be treated as a parameter named "id"
