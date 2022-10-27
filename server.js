@@ -24,7 +24,9 @@ const db = knex({
     client: 'pg',
     connection: {
       connectionString : process.env.DATABASE_URL,
-      ssl: true
+      ssl: {
+        rejectUnauthorized: false
+      }
     }
   });
 
@@ -33,15 +35,15 @@ app.use(express.json());
 app.use(cors());
 
 // app.get('/', (req, res) => { res.send(db.users) })
-app.get('/', (req, res) => { res.send('it is working!') })
-app.post('/signin', signin.handleSignin(db, bcrypt))
-app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt)})
-app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)}) //the :id here means that anything that the get request finds in the position of the :id will be treated as a parameter named "id"
-app.put('/image', (req, res) => { image.handleImage(req, res, db)})
-app.post('/imageUrl', (req, res) => { image.handleApiCall(req, res)})
+app.get('/', (req, res) => { res.send('it is working!') });
+app.post('/signin', signin.handleSignin(db, bcrypt));
+app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt)});
+app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)}); //the :id here means that anything that the get request finds in the position of the :id will be treated as a parameter named "id"
+app.put('/image', (req, res) => { image.handleImage(req, res, db)});
+app.post('/imageUrl', (req, res) => { image.handleApiCall(req, res)});
 
 app.listen((process.env.PORT || 3000), () => {
-    console.log('app is running on port ${process.env.PORT}');
+    console.log(`app is running on port ${process.env.PORT}`);
 });
 
 // bcrypt.hash("bacon", null, null, function(err, hash) {
